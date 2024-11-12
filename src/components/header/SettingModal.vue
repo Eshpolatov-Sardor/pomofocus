@@ -106,8 +106,8 @@ const store = useCounterStore()
           <label class="text-xs font-medium text-gray-500">Reminder</label>
           <input
             type="number"
-            placeholder="min"
-            class="ml-auto w-12 p-1 text-center border rounded-md"
+            class="ml-auto w-12 p-1 text-center border rounded-md text-black"
+            value="5"
           />
         </div>
         <div class="flex items-center mt-3 text-black">
@@ -130,7 +130,10 @@ const store = useCounterStore()
       </div>
 
       <!-- OK Button -->
-      <button class="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-600">
+      <button
+        @click="store.closemodals"
+        class="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-600"
+      >
         OK
       </button>
     </div>

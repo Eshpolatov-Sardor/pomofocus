@@ -1,6 +1,15 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { loginStore } from '@/stores/loginstores'
+import { ref } from 'vue'
+
+const store = loginStore()
+</script>
+
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-[#ba4949]">
+  <div
+    @submit.prevent="store.submit"
+    class="flex items-center justify-center min-h-screen bg-[#ba4949]"
+  >
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-center">
       <div class="flex flex-col items-center">
         <RouterLink to="/">
@@ -26,18 +35,23 @@
       <div class="text-left mb-4">
         <label class="text-gray-600 text-sm font-semibold">Email</label>
         <input
+          v-model="store.email"
           type="email"
           placeholder="example@mail.com"
           class="w-full mt-2 px-4 py-2 border rounded-md bg-gray-100 focus:outline-none"
         />
       </div>
-      <button class="w-full px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900">
+      <button
+        type="submit"
+        @click="store.submit"
+        class="w-full px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900"
+      >
         Sign up with Email
       </button>
       <p class="mt-6 text-gray-600">
         Already have an account?
         <RouterLink to="register">
-          <a href="#" class="text-blue-500 hover:underline">Log in</a>
+          <a href="#" class="text-blue-500 hover:underline">Register</a>
         </RouterLink>
       </p>
     </div>

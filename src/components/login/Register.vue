@@ -1,4 +1,17 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { registerStore } from '@/stores/regiter';
+import { useRouter } from 'vue-router';
+
+const store = registerStore();
+const router = useRouter();
+
+function handleLogin() {
+  store.submit();
+
+  router.push('/');
+}
+</script>
+
 <template>
   <div class="flex justify-center items-center min-h-screen bg-[#ba4949]">
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
@@ -31,6 +44,7 @@
           type="email"
           id="email"
           placeholder="example@mail.com"
+          v-model="store.email"
           class="w-full border border-gray-300 px-4 py-2 rounded-md mt-1 focus:outline-none focus:border-gray-500"
         />
       </div>
@@ -40,11 +54,15 @@
           type="password"
           id="password"
           placeholder="********"
+          v-model="store.password"
           class="w-full border border-gray-300 px-4 py-2 rounded-md mt-1 focus:outline-none focus:border-gray-500"
         />
       </div>
 
-      <button class="w-full bg-gray-800 text-white py-2 rounded-md mb-4 hover:bg-gray-900">
+      <button
+        @click="handleLogin"
+        class="w-full bg-gray-800 text-white py-2 rounded-md mb-4 hover:bg-gray-900"
+      >
         Log in with Email
       </button>
       <div class="text-center text-sm text-gray-500 mb-4">
@@ -52,7 +70,7 @@
       </div>
       <div class="text-center text-sm text-gray-500">
         Do not have an account?
-        <RouterLink to="/login">
+        <RouterLink to="/register">
           <a href="#" class="text-blue-600 hover:underline">Create account</a>
         </RouterLink>
       </div>

@@ -24,7 +24,6 @@ export const useCounterStore = defineStore('counter', () => {
   const isActivel = ref(false)
   const isPausedl = ref(false)
   const isaddtask = ref(false)
-  const pomodoroCount = ref<number>(1)
   const tab = ref<'summary' | 'detail' | 'ranking'>('summary')
   const focusTab = ref<'week' | 'month' | 'year'>('week')
   const page = ref(1)
@@ -230,16 +229,6 @@ export const useCounterStore = defineStore('counter', () => {
     isaddtask.value = true
   }
 
-  function increment() {
-    pomodoroCount.value += 1
-  }
-
-  function decrement() {
-    if (pomodoroCount.value > 0) {
-      pomodoroCount.value -= 1
-    }
-  }
-
   async function fetchPosts() {
     try {
       const response = await fetch('http://localhost:3000/users')
@@ -289,7 +278,6 @@ export const useCounterStore = defineStore('counter', () => {
     isPausedsh,
     isPausedl,
     isaddtask,
-    pomodoroCount,
     tab,
     focusTab,
     users,
@@ -313,8 +301,6 @@ export const useCounterStore = defineStore('counter', () => {
     stopLongBreakTimer,
     resetTimer,
     addtask,
-    increment,
-    decrement,
     prevPage,
     nextPage,
     paginatedUsers,
