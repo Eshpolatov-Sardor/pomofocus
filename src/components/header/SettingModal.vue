@@ -1,7 +1,33 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useCounterStore } from '@/stores/counter'
+const timeLeftInMinutes = computed({
+  get: () => store.timeLeft / 60,
+  set: (value: number) => {
+    store.timeLeft = value * 60
+  },
+})
 
+const timeLeftshInMinutes = computed({
+  get: () => store.timeLeftsh / 60,
+  set: (value: number) => {
+    store.timeLeftsh = value * 60
+  },
+})
+
+const timeLeftlInMinutes = computed({
+  get: () => store.timeLeftl / 60,
+  set: (value: number) => {
+    store.timeLeftl = value * 60
+  },
+})
+
+function okbuttons() {
+  console.log('Pomodoro minutes:', store.timeLeft / 60)
+  console.log('Short Break minutes:', store.timeLeftsh / 60)
+  console.log('Long Break minutes:', store.timeLeftl / 60)
+  store.issettingmodal = false
+}
 const store = useCounterStore()
 </script>
 <template>
@@ -12,17 +38,34 @@ const store = useCounterStore()
       <div class="mb-4">
         <label class="block text-xs font-medium text-gray-500">Time (minutes)</label>
         <div class="flex justify-between mt-2 text-black">
-          <div>
-            <h1>Pomodoro</h1>
-            <input type="number" class="w-20 p-1 text-center border rounded-md" value="25" />
-          </div>
-          <div>
-            <h1>Short Break</h1>
-            <input type="number" class="w-20 p-1 text-center border rounded-md" value="5" />
-          </div>
-          <div>
-            <h1>Long Break</h1>
-            <input type="number" class="w-20 p-1 text-center border rounded-md" value="15" />
+          <div class="flex justify-between mt-2 text-black w-full px-8">
+            <div>
+              <h1>Pomodoro</h1>
+              <input
+                v-model="timeLeftInMinutes"
+                type="number"
+                class="w-20 p-1 text-center border rounded-md"
+                placeholder="25"
+              />
+            </div>
+            <div>
+              <h1>Short Break</h1>
+              <input
+                v-model="timeLeftshInMinutes"
+                type="number"
+                class="w-20 p-1 text-center border rounded-md"
+                placeholder="5"
+              />
+            </div>
+            <div>
+              <h1>Long Break</h1>
+              <input
+                v-model="timeLeftlInMinutes"
+                type="number"
+                class="w-20 p-1 text-center border rounded-md"
+                placeholder="15"
+              />
+            </div>
           </div>
         </div>
         <div class="flex items-center mt-3">
@@ -80,7 +123,7 @@ const store = useCounterStore()
         <div class="flex items-center space-x-2">
           <button class="w-12 h-12 bg-red-600 rounded-lg"></button>
           <button class="w-12 h-12 bg-blue-600 rounded-lg"></button>
-          <button class="w-12 h-12 bg-green-600 rounded-lg"></button>
+          <button class="w-12 h-12 bg-blue-800 rounded-lg"></button>
         </div>
         <div class="flex justify-between">
           <label class="block text-lg font-medium text-gray-500 mt-3">Hour Format</label>
@@ -128,10 +171,8 @@ const store = useCounterStore()
           <button class="ml-auto border p-1 rounded-md text-sm">Add</button>
         </div>
       </div>
-
-      <!-- OK Button -->
       <button
-        @click="store.closemodals"
+        @click="okbuttons"
         class="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-600"
       >
         OK

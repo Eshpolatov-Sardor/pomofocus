@@ -29,6 +29,9 @@ export const useCounterStore = defineStore('counter', () => {
   const page = ref(1)
   const itemsPerPage = 10
   const users = ref([])
+  const pomodorominutts = ref([])
+  const shortbreakminutts = ref([])
+  const longbreakminutts = ref([])
 
   const formattedTime = computed(() => {
     const minutes = Math.floor(timeLeft.value / 60)
@@ -283,6 +286,7 @@ export const useCounterStore = defineStore('counter', () => {
     users,
     page,
     itemsPerPage,
+    paginatedUsers,
     reportmodal,
     settingmodal,
     barmenu,
@@ -303,6 +307,5 @@ export const useCounterStore = defineStore('counter', () => {
     addtask,
     prevPage,
     nextPage,
-    paginatedUsers,
   }
 })
