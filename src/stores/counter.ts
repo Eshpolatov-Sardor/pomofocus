@@ -257,6 +257,7 @@ export const useCounterStore = defineStore('counter', () => {
       page.value += 1
     }
   }
+  
   onMounted(() => {
     fetchPosts()
   })
